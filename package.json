@@ -1,0 +1,55 @@
+{
+  "name": "immer-state",
+  "version": "0.1.0",
+  "author": "Wes Souza",
+  "module": "dist/immer-state.esm.js",
+  "main": "dist/index.js",
+  "typings": "dist/index.d.ts",
+  "license": "MIT",
+  "files": [
+    "dist",
+    "src"
+  ],
+  "scripts": {
+    "start": "tsdx watch",
+    "build": "tsdx build",
+    "test": "tsdx test --passWithNoTests",
+    "lint": "tsdx lint",
+    "prepare": "tsdx build"
+  },
+  "dependencies": {},
+  "peerDependencies": {
+    "fast-deep-equal-ts": ">=3",
+    "immer": ">=6",
+    "react": ">=16"
+  },
+  "devDependencies": {
+    "@testing-library/react": "^10.0.2",
+    "@types/jest": "^25.1.4",
+    "@types/react": "^16.9.31",
+    "@types/react-dom": "^16.9.6",
+    "fast-deep-equal-ts": ">=3",
+    "husky": "^4.2.3",
+    "immer": ">=6",
+    "prettier": "^2.0.2",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
+    "tsdx": "^0.13.1",
+    "tslib": "^1.11.1",
+    "typescript": "^3.8.3"
+  },
+  "engines": {
+    "node": ">=10"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "tsdx lint"
+    }
+  },
+  "prettier": {
+    "printWidth": 80,
+    "semi": true,
+    "singleQuote": true,
+    "trailingComma": "es5"
+  }
+}
