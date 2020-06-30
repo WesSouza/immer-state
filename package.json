@@ -1,6 +1,6 @@
 {
   "name": "immer-state",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "author": "Wes Souza",
   "module": "dist/immer-state.esm.js",
   "main": "dist/index.js",
@@ -19,7 +19,7 @@
   },
   "dependencies": {},
   "peerDependencies": {
-    "fast-deep-equal-ts": ">=3",
+    "fast-deep-equal": ">=3",
     "immer": ">=6",
     "react": ">=16"
   },
