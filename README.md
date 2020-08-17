@@ -16,7 +16,7 @@ yarn add immer-state
 ```
 
 ```js
-import { StateManager, useSelector } from 'https://cdn.pika.dev/immer-state@^0.1.0';
+import { StateManager, useSelector } from 'https://cdn.pika.dev/immer-state@^0.3.0';
 ```
 
 ## Development
