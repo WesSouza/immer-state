@@ -53,5 +53,8 @@
     "semi": true,
     "singleQuote": true,
     "trailingComma": "es5"
+  },
+  "resolutions": {
+    "node-notifier": "^9.0.1"
   }
 }
