@@ -24,6 +24,7 @@
     "react": ">=16"
   },
   "devDependencies": {
+    "@size-limit/preset-small-lib": "^4.11.0",
     "@testing-library/react": "^11.2.7",
     "@types/jest": "^26.0.23",
     "@types/react": "^17.0.7",
@@ -35,6 +36,7 @@
     "prettier": "^2.3.0",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
+    "size-limit": "^4.11.0",
     "tsdx": "^0.14.1",
     "tslib": "^2.2.0",
     "typescript": "^4.2.4"
@@ -56,5 +58,15 @@
   },
   "resolutions": {
     "node-notifier": "^9.0.1"
-  }
+  },
+  "size-limit": [
+    {
+      "path": "dist/immer-state.cjs.production.min.js",
+      "limit": "10 KB"
+    },
+    {
+      "path": "dist/immer-state.esm.js",
+      "limit": "10 KB"
+    }
+  ]
 }
