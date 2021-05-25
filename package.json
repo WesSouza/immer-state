@@ -1,6 +1,6 @@
 {
   "name": "immer-state",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "author": "Wes Souza",
   "module": "dist/immer-state.esm.js",
   "main": "dist/index.js",
