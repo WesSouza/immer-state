@@ -1,15 +1,14 @@
 {
   "include": [
     "src",
-    "types",
-    "test/useSelector.test.tsx",
-    "test/StateManager.test.ts"
+    "types"
   ],
   "compilerOptions": {
     "alwaysStrict": true,
     "baseUrl": "./",
     "declaration": true,
     "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
     "importHelpers": true,
     "jsx": "react",
     "lib": [
@@ -18,6 +17,7 @@
     ],
     "module": "esnext",
     "moduleResolution": "node",
+    "noEmit": true,
     "noFallthroughCasesInSwitch": true,
     "noImplicitAny": true,
     "noImplicitReturns": true,
@@ -31,6 +31,7 @@
       ]
     },
     "rootDir": "./src",
+    "skipLibCheck": true,
     "sourceMap": true,
     "strict": true,
     "strictFunctionTypes": true,
