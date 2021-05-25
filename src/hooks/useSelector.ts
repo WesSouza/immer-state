@@ -19,9 +19,9 @@ export function useSelector<T, U>(
 
   const selectorFnCallback = useCallback(selectorFn, deps);
   useLayoutEffect(() => {
-    return stateManager.subscribe(selectorFnCallback, newValue => {
+    return stateManager.subscribe(selectorFnCallback, (newValue) => {
       value.current = newValue;
-      setState(number => number + 1);
+      setState((number) => number + 1);
     });
   }, [selectorFnCallback, stateManager]);
 
