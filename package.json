@@ -57,6 +57,8 @@
     "trailingComma": "es5"
   },
   "resolutions": {
+    "css-what": "^5.0.1",
+    "glob-parent": "^5.1.2",
     "node-notifier": "^9.0.1"
   },
   "size-limit": [
