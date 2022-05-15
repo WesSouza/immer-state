@@ -1,0 +1,26 @@
+{
+  "name": "immer-state",
+  "version": "0.5.0",
+  "author": "Wes Souza",
+  "module": "lib/immer-state.mjs",
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
+  "license": "MIT",
+  "files": [
+    "lib",
+    "src"
+  ],
+  "scripts": {},
+  "dependencies": {},
+  "peerDependencies": {
+    "fast-deep-equal": ">=3",
+    "immer": ">=6",
+    "react": ">=16"
+  },
+  "devDependencies": {
+    "immer": "^9.0.14"
+  },
+  "engines": {
+    "node": ">=14"
+  }
+}
