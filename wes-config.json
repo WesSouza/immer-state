@@ -1,0 +1,17 @@
+{
+  "version": 1,
+  "dependencies": [
+    "core",
+    "eslint",
+    "eslint-typescript",
+    "jest",
+    "jest-react",
+    "prettier",
+    "react-lib",
+    "typescript",
+    "typescript-node",
+    "typescript-node-lib",
+    "typescript-react",
+    "vscode"
+  ]
+}
