@@ -11,7 +11,7 @@ import { SelectorFn, StateManager } from '../StateManager';
 export function useSelector<T, U>(
   stateManager: StateManager<T>,
   selectorFn: SelectorFn<T, U>,
-  deps: DependencyList = []
+  deps: DependencyList = [],
 ) {
   const initialValue = selectorFn(stateManager.state);
   const value = useRef<U>(initialValue);

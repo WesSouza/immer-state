@@ -168,7 +168,7 @@ describe('StateManager.publish', () => {
     const callback3 = jest.fn();
     const unsubscribe3 = testStore.subscribe(
       (state) => state.prop1.prop1a,
-      callback3
+      callback3,
     );
 
     unsubscribe2();
@@ -196,7 +196,7 @@ describe('StateManager.publish', () => {
     const callback3 = jest.fn();
     const unsubscribe3 = testStore.subscribe(
       (state) => state.prop1.prop1a,
-      callback3
+      callback3,
     );
 
     testStore.mutate((state) => {
