@@ -1,9 +1,7 @@
 import * as React from 'react';
-import 'react-app-polyfill/ie11';
-import * as ReactDOM from 'react-dom';
+import * as ReactDOM from 'react-dom/client';
 
-import { useSelector } from '../dist';
-
+import { useSelector } from '../lib';
 import { counterIncrement } from './state/counter.actions';
 import { getCounterCurrent } from './state/counter.selectors';
 import { counterStore } from './state/counter.store';
@@ -22,4 +20,7 @@ function App() {
   );
 }
 
-ReactDOM.render(<App />, document.getElementById('root'));
+const root = document.getElementById('root');
+if (root) {
+  ReactDOM.createRoot(root).render(<App />);
+}

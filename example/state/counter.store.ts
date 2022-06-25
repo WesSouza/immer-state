@@ -1,4 +1,4 @@
-import { StateManager } from '../../dist';
+import { StateManager } from '../../lib';
 
 export interface CounterState {
   current: number;
