@@ -1,5 +1,4 @@
 import { render } from '@testing-library/react';
-import React from 'react';
 import { act } from 'react-dom/test-utils';
 
 import { useSelector } from '../src/hooks/useSelector';
@@ -48,7 +47,7 @@ describe('useSelector', () => {
   it('should listen to the state changes and update the components', () => {
     const FakeComponentA = () => {
       const hasText = useSelector(testStore, (state) =>
-        Boolean(state.prop2.prop2a)
+        Boolean(state.prop2.prop2a),
       );
       return (hasText && <div data-testid="fakeA">Hello</div>) || null;
     };
@@ -71,7 +70,7 @@ describe('useSelector', () => {
     };
     const FakeComponentD = () => {
       const hasText = useSelector(testStore, (state) =>
-        Boolean(state.prop2.prop2a)
+        Boolean(state.prop2.prop2a),
       );
       return (hasText && <div data-testid="fakeD">Hello</div>) || null;
     };
@@ -82,7 +81,7 @@ describe('useSelector', () => {
         <FakeComponentB />
         <FakeComponentC />
         <FakeComponentD />
-      </>
+      </>,
     );
 
     act(() => {
