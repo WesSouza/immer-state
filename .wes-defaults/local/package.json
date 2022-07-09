@@ -1,6 +1,6 @@
 {
   "name": "immer-state",
-  "version": "0.5.0",
+  "version": "0.6.0",
   "author": "Wes Souza",
   "module": "lib/immer-state.mjs",
   "main": "lib/index.js",
