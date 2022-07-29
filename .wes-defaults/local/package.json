@@ -2,9 +2,6 @@
   "name": "immer-state",
   "version": "0.6.0",
   "author": "Wes Souza",
-  "module": "lib/immer-state.mjs",
-  "main": "lib/index.js",
-  "types": "lib/index.d.ts",
   "license": "MIT",
   "files": [
     "lib",
