@@ -6,7 +6,7 @@ import {
   useState,
 } from 'react';
 
-import { SelectorFn, StateManager } from '../StateManager';
+import { SelectorFn, StateManager } from '../StateManager.js';
 
 export function useSelector<T, U>(
   stateManager: StateManager<T>,

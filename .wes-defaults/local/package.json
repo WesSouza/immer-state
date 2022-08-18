@@ -4,8 +4,7 @@
   "author": "Wes Souza",
   "license": "MIT",
   "files": [
-    "lib",
-    "src"
+    "dist"
   ],
   "scripts": {},
   "dependencies": {},

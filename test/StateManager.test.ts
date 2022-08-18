@@ -1,4 +1,6 @@
-import { StateManager } from '../src/StateManager';
+import { describe, expect, it, vi } from 'vitest';
+
+import { StateManager } from '../src/StateManager.js';
 
 interface TestState {
   prop1: {
@@ -25,7 +27,7 @@ const initialState: TestState = {
 let testStore = new StateManager(initialState);
 
 beforeAll(() => {
-  jest.useFakeTimers();
+  vi.useFakeTimers();
 });
 
 beforeEach(() => {
@@ -36,7 +38,7 @@ beforeEach(() => {
 });
 
 afterAll(() => {
-  jest.useRealTimers();
+  vi.useRealTimers();
 });
 
 describe('StateManager.get', () => {
@@ -85,7 +87,7 @@ describe('StateManager.mutate', () => {
   });
 
   it('calls publish, only once', () => {
-    jest.spyOn(testStore, 'publish');
+    vi.spyOn(testStore, 'publish');
 
     testStore.mutate((state) => {
       state.prop1.prop1a = 'New Value 1a';
@@ -96,16 +98,16 @@ describe('StateManager.mutate', () => {
     testStore.mutate((state) => {
       state.prop1.prop1a = 'New Value 1a copy (2)';
     });
-    jest.runAllTimers();
+    vi.runAllTimers();
 
     expect(testStore.publish).toHaveBeenCalledTimes(1);
   });
 
   it('allows mutations as side effects of subscribes', () => {
     const oldPublish = testStore.publish;
-    jest.spyOn(testStore, 'publish').mockImplementation(oldPublish);
+    vi.spyOn(testStore, 'publish').mockImplementation(oldPublish);
 
-    const callback = jest.fn().mockImplementation(() => {
+    const callback = vi.fn().mockImplementation(() => {
       testStore.mutate((state) => {
         state.prop2.prop2a = 'New Value 2a';
       });
@@ -115,7 +117,7 @@ describe('StateManager.mutate', () => {
     testStore.mutate((state) => {
       state.prop1.prop1a = 'New Value 1a';
     });
-    jest.runOnlyPendingTimers();
+    vi.runOnlyPendingTimers();
 
     expect(testStore.publish).toHaveBeenCalledTimes(1);
   });
@@ -123,9 +125,9 @@ describe('StateManager.mutate', () => {
 
 describe('StateManager.publish', () => {
   it('calls subscribers when property changes', () => {
-    const callback1 = jest.fn();
-    const callback2 = jest.fn();
-    const callback3 = jest.fn();
+    const callback1 = vi.fn();
+    const callback2 = vi.fn();
+    const callback3 = vi.fn();
     testStore.subscribe((state) => state, callback1);
     testStore.subscribe((state) => state.prop1, callback2);
     testStore.subscribe((state) => state.prop1.prop1a, callback3);
@@ -133,7 +135,7 @@ describe('StateManager.publish', () => {
     testStore.mutate((state) => {
       state.prop1.prop1a = 'New Value 1a';
     });
-    jest.runAllTimers();
+    vi.runAllTimers();
 
     expect(callback1).toHaveBeenCalledWith(testStore.state);
     expect(callback2).toHaveBeenCalledWith(testStore.state.prop1);
@@ -141,9 +143,9 @@ describe('StateManager.publish', () => {
   });
 
   it("doesn't call subscribers when property doesn't change", () => {
-    const callback1 = jest.fn();
-    const callback2 = jest.fn();
-    const callback3 = jest.fn();
+    const callback1 = vi.fn();
+    const callback2 = vi.fn();
+    const callback3 = vi.fn();
     testStore.subscribe((state) => state, callback1);
     testStore.subscribe((state) => state.prop1, callback2);
     testStore.subscribe((state) => state.prop1.prop1a, callback3);
@@ -151,7 +153,7 @@ describe('StateManager.publish', () => {
     testStore.mutate((state) => {
       state.prop2.prop2a = 'New Value 2a';
     });
-    jest.runAllTimers();
+    vi.runAllTimers();
 
     expect(callback1).toHaveBeenCalledWith(testStore.state);
     expect(callback2).not.toHaveBeenCalled();
@@ -159,13 +161,13 @@ describe('StateManager.publish', () => {
   });
 
   it("doesn't call unsubscribed", () => {
-    const callback1 = jest.fn();
+    const callback1 = vi.fn();
     testStore.subscribe((state) => state, callback1);
 
-    const callback2 = jest.fn();
+    const callback2 = vi.fn();
     const unsubscribe2 = testStore.subscribe((state) => state.prop1, callback2);
 
-    const callback3 = jest.fn();
+    const callback3 = vi.fn();
     const unsubscribe3 = testStore.subscribe(
       (state) => state.prop1.prop1a,
       callback3,
@@ -177,7 +179,7 @@ describe('StateManager.publish', () => {
     testStore.mutate((state) => {
       state.prop1.prop1a = 'New Value 1a';
     });
-    jest.runAllTimers();
+    vi.runAllTimers();
 
     expect(callback1).toHaveBeenCalledWith(testStore.state);
     expect(callback2).not.toHaveBeenCalled();
@@ -185,15 +187,15 @@ describe('StateManager.publish', () => {
   });
 
   it("doesn't call unsubscribed when unsubscribing inside callback", () => {
-    const callback1 = jest.fn();
+    const callback1 = vi.fn();
     testStore.subscribe((state) => state, callback1);
 
-    const callback2 = jest.fn().mockImplementation(() => {
+    const callback2 = vi.fn().mockImplementation(() => {
       unsubscribe3();
     });
     testStore.subscribe((state) => state.prop1, callback2);
 
-    const callback3 = jest.fn();
+    const callback3 = vi.fn();
     const unsubscribe3 = testStore.subscribe(
       (state) => state.prop1.prop1a,
       callback3,
@@ -202,12 +204,12 @@ describe('StateManager.publish', () => {
     testStore.mutate((state) => {
       state.prop1.prop1a = 'New Value 1a';
     });
-    jest.runAllTimers();
+    vi.runAllTimers();
 
     testStore.mutate((state) => {
       state.prop1.prop1a = 'New Value 1a copy';
     });
-    jest.runAllTimers();
+    vi.runAllTimers();
 
     expect(callback1).toHaveBeenCalledTimes(2);
     expect(callback2).toHaveBeenCalledTimes(2);
@@ -217,21 +219,21 @@ describe('StateManager.publish', () => {
 
 describe('StateManager.subscribe', () => {
   it('returns unsubscribe function', () => {
-    const callback = jest.fn();
+    const callback = vi.fn();
     const unsubscribe = testStore.subscribe((state) => state, callback);
 
     expect(typeof unsubscribe).toEqual('function');
   });
 
   it('returned unsubscribe function works', () => {
-    const callback = jest.fn();
+    const callback = vi.fn();
     const unsubscribe = testStore.subscribe((state) => state, callback);
     unsubscribe();
 
     testStore.mutate((state) => {
       state.prop1.prop1a = 'New Value 1a';
     });
-    jest.runAllTimers();
+    vi.runAllTimers();
 
     expect(callback).not.toHaveBeenCalled();
   });
@@ -239,14 +241,14 @@ describe('StateManager.subscribe', () => {
 
 describe('StateManager.unsubscribe', () => {
   it('works', () => {
-    const callback = jest.fn();
+    const callback = vi.fn();
     testStore.subscribe((state) => state, callback);
     testStore.unsubscribe(callback);
 
     testStore.mutate((state) => {
       state.prop1.prop1a = 'New Value 1a';
     });
-    jest.runAllTimers();
+    vi.runAllTimers();
 
     expect(callback).not.toHaveBeenCalled();
   });
@@ -254,9 +256,9 @@ describe('StateManager.unsubscribe', () => {
 
 describe('StateManager.DEBUG_destroy', () => {
   it('works', () => {
-    const callback1 = jest.fn();
-    const callback2 = jest.fn();
-    const callback3 = jest.fn();
+    const callback1 = vi.fn();
+    const callback2 = vi.fn();
+    const callback3 = vi.fn();
     testStore.subscribe((state) => state, callback1);
     testStore.subscribe((state) => state.prop1, callback2);
     testStore.subscribe((state) => state.prop1.prop1a, callback3);
@@ -265,7 +267,7 @@ describe('StateManager.DEBUG_destroy', () => {
     testStore.mutate((state) => {
       state.prop1.prop1a = 'New Value 1a';
     });
-    jest.runAllTimers();
+    vi.runAllTimers();
 
     expect(callback1).not.toHaveBeenCalled();
     expect(callback2).not.toHaveBeenCalled();

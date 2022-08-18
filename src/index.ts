@@ -1,2 +1,2 @@
-export * from './hooks/useSelector';
-export * from './StateManager';
+export * from './hooks/useSelector.js';
+export * from './StateManager.js';

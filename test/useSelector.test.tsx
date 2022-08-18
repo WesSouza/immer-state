@@ -1,8 +1,9 @@
 import { render } from '@testing-library/react';
 import { act } from 'react-dom/test-utils';
+import { describe, expect, it, vi } from 'vitest';
 
-import { useSelector } from '../src/hooks/useSelector';
-import { StateManager } from '../src/StateManager';
+import { useSelector } from '../src/hooks/useSelector.js';
+import { StateManager } from '../src/StateManager.js';
 
 interface TestState {
   prop1: {
@@ -29,7 +30,7 @@ const initialState: TestState = {
 let testStore = new StateManager(initialState);
 
 beforeAll(() => {
-  jest.useFakeTimers();
+  vi.useFakeTimers();
 });
 
 beforeEach(() => {
@@ -40,7 +41,7 @@ beforeEach(() => {
 });
 
 afterAll(() => {
-  jest.useRealTimers();
+  vi.useRealTimers();
 });
 
 describe('useSelector', () => {
@@ -89,7 +90,7 @@ describe('useSelector', () => {
         state.prop1.prop1a = 'P1a';
         state.prop2.prop2a = 'P2a';
       });
-      jest.runAllTimers();
+      vi.runAllTimers();
     });
 
     expect(getByTestId('fakeA')?.innerHTML).toEqual('Hello');
@@ -101,7 +102,7 @@ describe('useSelector', () => {
       testStore.mutate((state) => {
         state.prop2.prop2a = 'P2b';
       });
-      jest.runAllTimers();
+      vi.runAllTimers();
     });
 
     expect(getByTestId('fakeA')?.innerHTML).toEqual('Hello');
@@ -113,9 +114,9 @@ describe('useSelector', () => {
 
 describe('StateManager.DEBUG_destroy', () => {
   it('works', () => {
-    const callback1 = jest.fn();
-    const callback2 = jest.fn();
-    const callback3 = jest.fn();
+    const callback1 = vi.fn();
+    const callback2 = vi.fn();
+    const callback3 = vi.fn();
     testStore.subscribe((state) => state, callback1);
     testStore.subscribe((state) => state.prop1, callback2);
     testStore.subscribe((state) => state.prop1.prop1a, callback3);
@@ -124,7 +125,7 @@ describe('StateManager.DEBUG_destroy', () => {
     testStore.mutate((state) => {
       state.prop1.prop1a = 'New Value 1a';
     });
-    jest.runAllTimers();
+    vi.runAllTimers();
 
     expect(callback1).not.toHaveBeenCalled();
     expect(callback2).not.toHaveBeenCalled();
