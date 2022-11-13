@@ -19,13 +19,6 @@ yarn add immer-state
 import { StateManager, useSelector } from 'https://cdn.pika.dev/immer-state@^0.3.0';
 ```
 
-## Development
-
-```sh
-yarn install
-yarn run start
-```
-
 ## Example
 
 ```sh
