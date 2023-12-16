@@ -16,7 +16,7 @@ yarn add immer-state
 ```
 
 ```js
-import { StateManager, useSelector } from 'https://cdn.pika.dev/immer-state@^0.3.0';
+import { StateManager, useSelector } from 'https://cdn.skypack.dev/immer-state@%5E0.8.0';
 ```
 
 ## Example
@@ -28,14 +28,6 @@ yarn run start
 ```
 
 Then open [localhost:1234](http://localhost:1234/).
-
-## Development
-
-This library uses `wes-cli`, which simplifies configuration setup. Instead of
-using `yarn install`, you should use `npx wes-cli install`, which will create
-all configuration files and run `yarn install`.
-
-[Read more about `wes-cli`.](https://github.com/WesSouza/wes-cli/#wes-install)
 
 ## LICENSE
 
